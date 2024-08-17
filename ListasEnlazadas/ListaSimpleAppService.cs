@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -52,7 +53,7 @@ namespace ListasEnlazadas
 
         public void Recorrido()
         {
-            if(Raiz != null)
+            if (Raiz != null)
             {
                 Puntero = Raiz;
                 while (Puntero != null)
@@ -63,15 +64,15 @@ namespace ListasEnlazadas
             }
         }
 
-        
+
 
         public bool Buscar(int dato)
         {
             var estado = false;
             Puntero = Raiz;
             while (Puntero != null && !estado)
-            { 
-                if(Puntero.Info == dato)
+            {
+                if (Puntero.Info == dato)
                 {
                     estado = true;
                     break;
@@ -80,6 +81,27 @@ namespace ListasEnlazadas
             }
 
             return estado;
+        }
+
+        public void Eliminar(int dato)
+        {
+            if (Raiz.Info == dato)
+            {
+                Raiz = Raiz.Sig;
+                return;
+            }
+            Puntero = Raiz;
+            while (Puntero != null)
+            {
+                if (Puntero.Info == dato)
+                {
+                    Anterior.Sig = Puntero.Sig;
+                    break;
+                }
+
+                Anterior = Puntero;
+                Puntero = Puntero!.Sig;
+            }
         }
 
     }
